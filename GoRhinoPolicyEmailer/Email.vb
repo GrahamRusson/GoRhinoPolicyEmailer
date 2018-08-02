@@ -55,14 +55,14 @@ Public Class Email
         End Get
     End Property
 
-    Public Function SendMail() As Boolean
+    Public Function SendMail(RootPath As String) As Boolean
 
         Try
 
             ' To create the PdfContentTemplate.html file, if it changes, just "view source" in your browser, and then replace the content of this file, and it becomes the new template for generating the PDF. The placeholders get replaced below, then saved to the new PDF file.
 
-            Dim rootPath As String = (New System.Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath
-            rootPath = rootPath.ToLower().Replace("gorhinopolicyemailer.dll", "")
+            'Dim rootPath As String = (New System.Uri(Assembly.GetExecutingAssembly().CodeBase)).AbsolutePath
+            'RootPath = rootPath.ToLower().Replace("gorhinopolicyemailer.dll", "")
 
             Dim path As String = ""
 
@@ -93,7 +93,7 @@ Public Class Email
             htmlString = htmlString.Replace("[client_address]", ClientInformation.ClientAddress)
 
             Dim fileName As String = rootPath & "\YouAssistPolicy_" & ClientInformation.ClientPolicyNumber & ".pdf"
-            
+
             Dim configuration As TheArtOfDev.HtmlRenderer.PdfSharp.PdfGenerateConfig = New TheArtOfDev.HtmlRenderer.PdfSharp.PdfGenerateConfig()
             configuration.PageSize = PageSize.Letter
             configuration.MarginLeft = 25
